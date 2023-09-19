@@ -1,4 +1,4 @@
-/*#define _CRT_SECURE_NO_WARNiNGS_
+#define _CRT_SECURE_NO_WARNiNGS_
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -71,22 +71,53 @@ void MakeBinaryTree(TreeNode* parent, TreeNode* lson, TreeNode* rson)   //트리노
 	parent->right = rson;
 }
 
-void preorder(TreeNode* now)                                            //재귀를 활용한 전위순회
+TreeNode* peek(stackNode** top)                                    //가장 위의 값을 삭제하면서 출력하는 함수
 {
-	if (now->data != NULL)
-	{
-		printf("%c ", now->data);
-	}
-	if (now->left != NULL)
-	{
-		preorder(now->left);
-	}
-	if (now->right != NULL)
-	{
-		preorder(now->right);
-	}
+	stackNode* p = *top;
+	if (p == NULL)                                              //스택이 빈 경우
+		exit(1);
+	TreeNode *data = p->data;                                     //데이터 값을 빼내기
+	return data;
 }
 
+void postorder_iter(TreeNode* root) {
+	if (root == NULL)
+		return;
+
+	stackNode* stack = createStack();
+	TreeNode* now = root;
+	TreeNode* lastVisited = NULL;
+
+	while (!Empty_Stack(&stack) || now != NULL) {  //스택이 비거나 현 위치가 NULL이 아닌 경우 반복
+		if (now != NULL) {
+			push(&stack, now);
+			now = now->left;               //왼쪽 끝까지감.
+		}
+		else {
+			TreeNode* peekNode = peek(&stack);
+			if (peekNode->right != NULL && lastVisited != peekNode->right) {   //만약 이미 출력했던 곳이라면 가지 않음.
+				now = peekNode->right;         //오른쪽 끝까지감.
+			}
+			else {  
+				printf("%c ", peekNode->data);     //더이상 내려갈 공간이 없으면 출력
+				lastVisited = pop(&stack);         //한번 들린 곳 체크
+			}
+		}
+	}
+
+	deleteStack(&stack);
+}
+
+
+void postorder(TreeNode *x)
+{
+	if (x != NULL)
+	{
+		postorder(x->left);
+		postorder(x->right);
+		printf("%c ", x->data);
+	}
+}
 
 int main()
 {
@@ -102,9 +133,10 @@ int main()
 	MakeBinaryTree(b, d, e);
 	MakeBinaryTree(c, f, NULL);                  //비어있는 공간은 NULL로 처리
 
-	preorder(a);                                 //전위순회로 출력
+	postorder_iter(a);                                 //전위순회로 출력
+	printf("\n");
+	postorder(a);
 
 	free(a); free(b); free(c); free(d), free(e), free(f);    //메모리 할당을 해제해줌.
 	return 0;
 }
-*/
