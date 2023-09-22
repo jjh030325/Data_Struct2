@@ -1,3 +1,4 @@
+/*
 #define _CRT_SECURE_NO_WARNiNGS_
 #include <stdio.h>
 #include <stdlib.h>
@@ -140,3 +141,4 @@ int main()
 	free(a); free(b); free(c); free(d), free(e), free(f);    //메모리 할당을 해제해줌.
 	return 0;
 }
+*/
