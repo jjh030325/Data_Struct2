@@ -30,5 +30,8 @@
     <ClCompile Include="230921.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="230926.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

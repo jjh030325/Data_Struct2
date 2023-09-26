@@ -1,9 +1,12 @@
-/*#define _CRT_SECURE_NO_WARNINGS
+/*
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-bool data_check[101] = { false, };       //1에서 100 사이 중복 체크용 배열
+bool data_check[1001] = { false, };       //1에서 1000 사이 중복 체크용 배열
+int last = 0;
+int level = 0;
 
 struct BinarySearchTreeNode {
 	int data;
@@ -87,6 +90,7 @@ void levelOrder(struct BinarySearchTreeNode* root) {
 
 BinarySearchTreeNode* insert(BinarySearchTreeNode *node, int n)
 {
+	int nowlevel = 1;
 	BinarySearchTreeNode* newNode = (BinarySearchTreeNode *)malloc(sizeof(BinarySearchTreeNode));
 	newNode->left = NULL;
 	newNode->right = NULL;
@@ -101,13 +105,15 @@ BinarySearchTreeNode* insert(BinarySearchTreeNode *node, int n)
 	{
 		if (p->data > n && p->left != NULL)           //갈 수 있는 왼쪽 끝으로
 		{
+			nowlevel++;
 			p = p->left;
 		}
 		else if (p->data < n && p->right != NULL)     //갈 수 있는 오른쪽 끝으로
 		{
+			nowlevel++;
 			p = p->right;
 		}
-		else if(p->data == n)                         //이미 있는 경우 리턴
+		else if (p->data == n)                         //이미 있는 경우 리턴
 		{
 			return node;
 		}
@@ -116,10 +122,18 @@ BinarySearchTreeNode* insert(BinarySearchTreeNode *node, int n)
 			if (p->data > n)                          //더이상 갈 곳이 없는 경우 노드 추가로 이어줌
 			{
 				p->left = newNode;
+				if (nowlevel > level)
+				{
+					level = nowlevel;
+				}
 				return node;
 			}
 			else if (p->data < n)                     //더이상 갈 곳이 없는 경우 노드 추가로 이어줌
 			{
+				if (nowlevel > level)
+				{
+					level = nowlevel;
+				}
 				p->right = newNode;
 				return node;
 			}
@@ -128,16 +142,24 @@ BinarySearchTreeNode* insert(BinarySearchTreeNode *node, int n)
 }
 
 // 반복적인 탐색 함수
-BinarySearchTreeNode *search(BinarySearchTreeNode *node, int key)
+void search_level(BinarySearchTreeNode *node, int key, int level)
 {
 	while (node != NULL) {
-		if (key == node->data) return node;
+		if (key == node->data) break;
 		else if (key < node->data)
 			node = node->left;
 		else
 			node = node->right;
+		level++;
 	}
-	return NULL; // 탐색에 실패했을 경우 NULL 반환
+	if (node != NULL)
+	{
+		printf("탐색의 횟수 : %d\n", level);
+	}
+	else
+	{
+		printf("%d번 찾았으나 노드가 없습니다.", level);
+	}
 }
 
 int FindMin(BinarySearchTreeNode *node)
@@ -171,14 +193,13 @@ BinarySearchTreeNode *randomTree_BST(BinarySearchTreeNode *root, int n)
 	{
 		while (1)
 		{
-			input = rand() % 100 + 1;            //1에서 100사이
+			input = rand() % 1000 + 1;            //1에서 100사이
 			if (data_check[input] == false)      //나온 적 없는 경우
 			{
 				data_check[input] = true;        //나왔다고 체크 후 빠져나옴
 				break;
 			}
 		}
-		printf("%d번째 숫자 = %d\n", i, input);  //출력
 		root = insert(root, input);              //노드삽입
 	}
 	return root;
@@ -188,27 +209,20 @@ int main()
 {
 	srand(time(NULL));
 	BinarySearchTreeNode *root = NULL;             //트리노드 선언
+	BinarySearchTreeNode *root2 = NULL;             //트리노드 선언
 	int n;
 
-	scanf("%d", &n);
-
+	n = 10;
 	root = randomTree_BST(root, n);
-
+	
 	inorder(root);
-	printf("\n");
-	levelOrder(root);
+	printf("\n트리의 레벨 = %d\n", level);
+
+	last = rand() % 2000 + 1;
+
+	printf("랜덤값 = %d\n", last);
+	search_level(root, last, 0);
 
 	return 0;
 }
-*/
-
-/*
-1. BST의 insert 함수 생성
-BST의 입력함수를 생성하고, level order, inorder 방식으로 출력하시오.
-입력 데이터 {18, 7, 26, 3, 12, 31, 27}
-
-2. 랜덤한 BST 만들기
-1~100 사이의 임의의 숫자를 선택하여 BST를 만드시오.
-(단, 중복된 값은 선택되지 않게하고, 노드의 갯수는 함수의 파라미터로 받게 하시오.)
-예) 7개의 값을 선택해 BST를 만드는 함수: root_BST = randomTree_BST(7);
 */
