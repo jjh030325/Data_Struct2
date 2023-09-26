@@ -1,4 +1,3 @@
-/*
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
@@ -105,7 +104,7 @@ BinarySearchTreeNode* insert(BinarySearchTreeNode *node, int n)
 	{
 		if (p->data > n && p->left != NULL)           //갈 수 있는 왼쪽 끝으로
 		{
-			nowlevel++;
+			nowlevel++;                               //내려갈 때 현 레벨 증가
 			p = p->left;
 		}
 		else if (p->data < n && p->right != NULL)     //갈 수 있는 오른쪽 끝으로
@@ -122,7 +121,7 @@ BinarySearchTreeNode* insert(BinarySearchTreeNode *node, int n)
 			if (p->data > n)                          //더이상 갈 곳이 없는 경우 노드 추가로 이어줌
 			{
 				p->left = newNode;
-				if (nowlevel > level)
+				if (nowlevel > level)                 //더이상 갈 수 없을 때, 최고레벨이면 갱신해줌
 				{
 					level = nowlevel;
 				}
@@ -152,7 +151,7 @@ void search_level(BinarySearchTreeNode *node, int key, int level)
 			node = node->right;
 		level++;
 	}
-	if (node != NULL)
+	if (node != NULL)                             //있나 없나 체크
 	{
 		printf("탐색의 횟수 : %d\n", level);
 	}
@@ -225,4 +224,3 @@ int main()
 
 	return 0;
 }
-*/
