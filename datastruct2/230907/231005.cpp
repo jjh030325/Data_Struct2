@@ -13,6 +13,57 @@ struct BinarySearchTreeNode {
 	struct BinarySearchTreeNode *right;
 };
 
+// 큐 구현을 위한 구조체 정의
+struct QueueNode {
+	struct BinarySearchTreeNode* data;
+	struct QueueNode* next;
+};
+
+// 큐 구조체 정의
+struct Queue {
+	struct QueueNode* front;
+	struct QueueNode* rear;
+};
+
+// 큐 초기화
+struct Queue* createQueue() {
+	struct Queue* queue = (struct Queue*)malloc(sizeof(struct Queue));
+	queue->front = queue->rear = NULL;
+	return queue;
+}
+
+// 큐에 요소 추가
+void enqueue(struct Queue* queue, struct BinarySearchTreeNode* data) {
+	struct QueueNode* newNode = (struct QueueNode*)malloc(sizeof(struct QueueNode));
+	newNode->data = data;
+	newNode->next = NULL;
+
+	if (queue->rear == NULL) {
+		queue->front = queue->rear = newNode;
+		return;
+	}
+
+	queue->rear->next = newNode;
+	queue->rear = newNode;
+}
+
+// 큐에서 요소 제거
+struct BinarySearchTreeNode* dequeue(struct Queue* queue) {
+	if (queue->front == NULL)
+		return NULL;
+
+	struct BinarySearchTreeNode* data = queue->front->data;
+	struct QueueNode* temp = queue->front;
+
+	queue->front = queue->front->next;
+
+	if (queue->front == NULL)
+		queue->rear = NULL;
+
+	free(temp);
+	return data;
+}
+
 BinarySearchTreeNode* FindMax(BinarySearchTreeNode *node)
 {
 	while (node->right != NULL)
@@ -159,6 +210,29 @@ int chooseNode()
 	
 }
 
+// 레벨 순회 함수
+void levelOrder(struct BinarySearchTreeNode* root) {
+	if (root == NULL)
+		return;
+
+	struct Queue* queue = createQueue();
+	enqueue(queue, root);
+
+	while (queue->front != NULL) {
+		struct BinarySearchTreeNode* current = dequeue(queue);
+		printf("%d ", current->data);
+
+		if (current->left != NULL)
+			enqueue(queue, current->left);
+
+		if (current->right != NULL)
+			enqueue(queue, current->right);
+	}
+
+	free(queue);
+}
+
+
 int main()
 {
 	srand(time(NULL));
@@ -167,11 +241,11 @@ int main()
 
 	root = randomTree_BST(root, 10);
 
-	inorder(root);
+	levelOrder(root);
 	choose = chooseNode();                         //노드 선택
 	root = deleteBSTN(root, choose);
 	printf("\n");
-	inorder(root);
+	levelOrder(root);
 	printf("case %d", case_check);
 
 	return 0;

@@ -36,5 +36,8 @@
     <ClCompile Include="231005.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="quiz1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
