@@ -1,4 +1,5 @@
-/*#define _CRT_SECURE_NO_WARNINGS
+/*
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -114,7 +115,6 @@ int main()
 	root = printAndinsert(root, 2);
 	root = printAndinsert(root, 9);
 	root = printAndinsert(root, 1);
-	root = printAndinsert(root, 8);
 	root = printAndinsert(root, 0);
 
 	inorder(root);

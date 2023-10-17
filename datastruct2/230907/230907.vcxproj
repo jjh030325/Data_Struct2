@@ -132,6 +132,7 @@
     <ClCompile Include="230926.cpp" />
     <ClCompile Include="231005.cpp" />
     <ClCompile Include="231012.cpp" />
+    <ClCompile Include="231017.cpp" />
     <ClCompile Include="quiz1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
