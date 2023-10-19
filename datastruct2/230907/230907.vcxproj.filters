@@ -45,5 +45,11 @@
     <ClCompile Include="231017.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="231019.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="timecheck.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
