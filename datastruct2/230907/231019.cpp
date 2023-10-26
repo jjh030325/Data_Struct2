@@ -1,3 +1,4 @@
+/*
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
@@ -173,6 +174,7 @@ int main()
 
 	return 0;
 }
+*/
 
 /*
 우선순위 큐 구현방법 작은 값을 찾는 것.
