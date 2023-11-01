@@ -1,4 +1,4 @@
-
+/*
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
@@ -332,7 +332,7 @@ int main()
 	resetAVL();
 	return 0;
 }
-
+*/
 /*
 0. n개의 랜덤한 정수를 발생하여 배열에 저장 (단, 랜덤한 정수의 범위는 rand()*rand() 이다.)
 
