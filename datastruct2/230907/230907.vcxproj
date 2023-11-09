@@ -135,6 +135,8 @@
     <ClCompile Include="231017.cpp" />
     <ClCompile Include="231019.cpp" />
     <ClCompile Include="231031.cpp" />
+    <ClCompile Include="231102.cpp" />
+    <ClCompile Include="231109.cpp" />
     <ClCompile Include="quiz1.cpp" />
     <ClCompile Include="timecheck.cpp" />
   </ItemGroup>
