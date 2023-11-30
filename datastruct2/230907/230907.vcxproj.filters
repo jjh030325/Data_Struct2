@@ -72,5 +72,11 @@
     <ClCompile Include="231128.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Quiz2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Quiz2_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
