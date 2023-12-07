@@ -142,6 +142,7 @@
     <ClCompile Include="231123.cpp" />
     <ClCompile Include="231128.cpp" />
     <ClCompile Include="231205.cpp" />
+    <ClCompile Include="231207.cpp" />
     <ClCompile Include="quiz1.cpp" />
     <ClCompile Include="Quiz2.cpp" />
     <ClCompile Include="Quiz2_2.cpp" />
